@@ -1,0 +1,32 @@
+
+package myproject6;
+
+public class EconomyRide extends Ride {
+    private double pricePerMinute;
+
+    public EconomyRide(String passengerName, String pickup, String destination, double distanceKm, int durationMin, double pricePerKm, double pricePerMinute) {
+        super(passengerName, pickup, destination, distanceKm, durationMin, pricePerKm);
+        
+        if (pricePerMinute <= 0) {
+            System.out.println("Warning: pricePerMinute must be positive. Setting to 1.");
+            this.pricePerMinute = 1;
+        } else {
+            this.pricePerMinute = pricePerMinute;
+        }
+    }
+
+    public double getPricePerMinute() {
+        return pricePerMinute;
+    }
+
+    @Override
+    public double calculateFare() {
+        double fare = super.calculateFare() + (getDurationMin() * pricePerMinute);
+        return Math.max(fare, 50.0);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Price/Min: " + pricePerMinute + " TL";
+    }
+}
